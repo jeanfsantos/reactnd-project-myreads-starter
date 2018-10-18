@@ -42,9 +42,10 @@ class BookItem extends React.Component {
 					</div>
 					<div className="book-title">{title}</div>
 					<div className="book-authors">
-						{authors.reduce(
-							(total, author) => `${total}, ${author}`
-						)}
+						{authors &&
+							authors.reduce(
+								(total, author) => `${total}, ${author}`
+							)}
 					</div>
 				</div>
 			</li>
