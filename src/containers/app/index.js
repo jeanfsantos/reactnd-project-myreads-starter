@@ -3,7 +3,7 @@ import React from "react";
 
 import SearchBooks from "@Pages/search-books/index";
 import ListBooks from "@Pages/list-books/index";
-import "./App.css";
+import "./style.css";
 
 const showSearchPage = () => ({
   showSearchPage: true
