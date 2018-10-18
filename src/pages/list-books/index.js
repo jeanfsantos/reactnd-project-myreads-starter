@@ -1,14 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import * as BooksAPI from '@Api/BooksAPI';
 import BookItem from '@Components/book-item/index';
-import ButtonFloat from '@Components/button-float/index';
 
 class ListBooks extends React.Component {
 	static propTypes = {
 		handleShowSearchPage: PropTypes.func.isRequired,
 		books: PropTypes.array.isRequired
 	};
+
+	state = {
+		books: []
+	};
+
+	componentDidMount() {
+		BooksAPI.getAll().then(data => {
+			this.setState({
+				books: data
+			});
+		});
+	}
 
 	render() {
 		return (
@@ -24,7 +35,7 @@ class ListBooks extends React.Component {
 							</h2>
 							<div className="bookshelf-books">
 								<ol className="books-grid">
-									{this.props.books
+									{this.state.books
 										.filter(
 											book =>
 												book.shelf ===
@@ -43,12 +54,15 @@ class ListBooks extends React.Component {
 							<h2 className="bookshelf-title">Want to Read</h2>
 							<div className="bookshelf-books">
 								<ol className="books-grid">
-									{this.props.books
+									{this.state.books
 										.filter(
 											book => book.shelf === 'wantToRead'
 										)
-										.map((book, index) => (
-											<BookItem book={book} key={index} />
+										.map(book => (
+											<BookItem
+												book={book}
+												key={book.id}
+											/>
 										))}
 								</ol>
 							</div>
@@ -57,19 +71,22 @@ class ListBooks extends React.Component {
 							<h2 className="bookshelf-title">Read</h2>
 							<div className="bookshelf-books">
 								<ol className="books-grid">
-									{this.props.books
+									{this.state.books
 										.filter(book => book.shelf === 'read')
-										.map((book, index) => (
-											<BookItem book={book} key={index} />
+										.map(book => (
+											<BookItem
+												book={book}
+												key={book.id}
+											/>
 										))}
 								</ol>
 							</div>
 						</div>
 					</div>
 				</div>
-				<ButtonFloat
-					onClickShowSearch={this.props.handleShowSearchPage}
-				/>
+				<div className="open-search">
+					<a onClick={this.props.handleShowSearchPage}>Add a book</a>
+				</div>
 			</div>
 		);
 	}
