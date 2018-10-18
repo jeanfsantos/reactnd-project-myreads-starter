@@ -15,22 +15,18 @@ class SearchBooks extends React.Component {
 
 	handleInputSearch = e => {
 		BooksAPI.search(e.target.value).then((data = []) => {
-			if (data.error) return;
-			this.setState({
-				books: data
-			});
+			if (data.error) {
+				return;
+			}
+			this.setState({ books: data });
 		});
 	};
 
 	handleShelf = (book, shelf) => {
 		BooksAPI.update(book, shelf).then(() => {
-			const books = this.state.books.map(_book => {
-				if (book.id === _book.id) {
-					_book.shelf = shelf;
-					return _book;
-				}
-				return _book;
-			});
+			const books = this.state.books.filter(
+				_book => book.id !== _book.id
+			);
 			this.setState({ books });
 		});
 	};
