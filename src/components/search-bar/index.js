@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DebounceInput } from 'react-debounce-input';
 
 class SearchBar extends React.Component {
 	static propTypes = {
-		onHiddenSearchPage: PropTypes.func.isRequired
+		onHiddenSearchPage: PropTypes.func.isRequired,
+		onChangeInputSearch: PropTypes.func.isRequired
 	};
 
 	render() {
@@ -23,9 +25,11 @@ class SearchBar extends React.Component {
 
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
-                */}
-					<input
-						type="text"
+				*/}
+					<DebounceInput
+						minLength={2}
+						debounceTimeout={300}
+						onChange={this.props.onChangeInputSearch}
 						placeholder="Search by title or author"
 					/>
 				</div>
