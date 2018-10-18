@@ -5,8 +5,7 @@ import BookItem from '@Components/book-item/index';
 
 class ListBooks extends React.Component {
 	static propTypes = {
-		handleShowSearchPage: PropTypes.func.isRequired,
-		books: PropTypes.array.isRequired
+		handleShowSearchPage: PropTypes.func.isRequired
 	};
 
 	state = {
