@@ -3,11 +3,20 @@ import PropTypes from 'prop-types';
 
 class BookItem extends React.Component {
 	static propTypes = {
-		book: PropTypes.object
+		book: PropTypes.object,
+		onChangeShelf: PropTypes.func
 	};
 
 	static defaultProps = {
 		book: {}
+	};
+
+	onChangeSelect = e => {
+		const value = e.target.value;
+		if (value === 'move') {
+			return;
+		}
+		this.props.onChangeShelf(this.props.book, value);
 	};
 
 	render() {
@@ -27,10 +36,8 @@ class BookItem extends React.Component {
 							}}
 						/>
 						<div className="book-shelf-changer">
-							<select>
-								<option value="move" disabled>
-									Move to...
-								</option>
+							<select onChange={this.onChangeSelect}>
+								<option value="move">Move to...</option>
 								<option value="currentlyReading">
 									Currently Reading
 								</option>

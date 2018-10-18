@@ -20,6 +20,19 @@ class ListBooks extends React.Component {
 		});
 	}
 
+	handleShelf = (book, shelf) => {
+		BooksAPI.update(book, shelf).then(() => {
+			const books = this.state.books.map(_book => {
+				if (book.id === _book.id) {
+					_book.shelf = shelf;
+					return _book;
+				}
+				return _book;
+			});
+			this.setState({ books });
+		});
+	};
+
 	render() {
 		return (
 			<div className="list-books">
@@ -44,6 +57,7 @@ class ListBooks extends React.Component {
 											<BookItem
 												book={book}
 												key={book.id}
+												onChangeShelf={this.handleShelf}
 											/>
 										))}
 								</ol>
@@ -61,6 +75,7 @@ class ListBooks extends React.Component {
 											<BookItem
 												book={book}
 												key={book.id}
+												onChangeShelf={this.handleShelf}
 											/>
 										))}
 								</ol>
@@ -76,6 +91,7 @@ class ListBooks extends React.Component {
 											<BookItem
 												book={book}
 												key={book.id}
+												onChangeShelf={this.handleShelf}
 											/>
 										))}
 								</ol>
