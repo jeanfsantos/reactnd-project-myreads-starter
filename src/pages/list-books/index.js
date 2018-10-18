@@ -6,7 +6,8 @@ import ButtonFloat from '@Components/button-float/index';
 
 class ListBooks extends React.Component {
 	static propTypes = {
-		handleShowSearchPage: PropTypes.func.isRequired
+		handleShowSearchPage: PropTypes.func.isRequired,
+		books: PropTypes.array.isRequired
 	};
 
 	render() {
@@ -23,7 +24,18 @@ class ListBooks extends React.Component {
 							</h2>
 							<div className="bookshelf-books">
 								<ol className="books-grid">
-									<BookItem />
+									{this.props.books
+										.filter(
+											book =>
+												book.shelf ===
+												'currentlyReading'
+										)
+										.map(book => (
+											<BookItem
+												book={book}
+												key={book.id}
+											/>
+										))}
 								</ol>
 							</div>
 						</div>
@@ -31,7 +43,13 @@ class ListBooks extends React.Component {
 							<h2 className="bookshelf-title">Want to Read</h2>
 							<div className="bookshelf-books">
 								<ol className="books-grid">
-									<BookItem />
+									{this.props.books
+										.filter(
+											book => book.shelf === 'wantToRead'
+										)
+										.map((book, index) => (
+											<BookItem book={book} key={index} />
+										))}
 								</ol>
 							</div>
 						</div>
@@ -39,7 +57,11 @@ class ListBooks extends React.Component {
 							<h2 className="bookshelf-title">Read</h2>
 							<div className="bookshelf-books">
 								<ol className="books-grid">
-									<BookItem />
+									{this.props.books
+										.filter(book => book.shelf === 'read')
+										.map((book, index) => (
+											<BookItem book={book} key={index} />
+										))}
 								</ol>
 							</div>
 						</div>
