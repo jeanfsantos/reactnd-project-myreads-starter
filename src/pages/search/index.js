@@ -4,7 +4,7 @@ import { DebounceInput } from 'react-debounce-input';
 import * as BooksAPI from '@Api/BooksAPI';
 import BookItem from '@Components/book-item/index';
 
-class SearchBooks extends React.Component {
+class Search extends React.Component {
 	static propTypes = {
 		handleHiddenSearchPage: PropTypes.func.isRequired
 	};
@@ -74,4 +74,4 @@ class SearchBooks extends React.Component {
 	}
 }
 
-export default SearchBooks;
+export default Search;

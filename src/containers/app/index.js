@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchBooks from '@Pages/search-books/index';
-import ListBooks from '@Pages/list-books/index';
+import Search from '@Pages/search/index';
+import List from '@Pages/list/index';
 import './style.css';
 
 const showSearchPage = () => ({
@@ -26,13 +26,13 @@ class BooksApp extends React.Component {
 		return (
 			<div className="app">
 				{this.state.showSearchPage ? (
-					<SearchBooks
+					<Search
 						handleHiddenSearchPage={() =>
 							this.setState(hiddenSearchPage)
 						}
 					/>
 				) : (
-					<ListBooks
+					<List
 						handleShowSearchPage={() =>
 							this.setState(showSearchPage)
 						}
