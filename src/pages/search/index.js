@@ -1,14 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { DebounceInput } from 'react-debounce-input';
+import { Link } from 'react-router-dom';
 import * as BooksAPI from '@Api/BooksAPI';
 import BookItem from '@Components/book-item/index';
 
 class Search extends React.Component {
-	static propTypes = {
-		handleHiddenSearchPage: PropTypes.func.isRequired
-	};
-
 	state = {
 		books: []
 	};
@@ -35,12 +31,9 @@ class Search extends React.Component {
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">
-					<a
-						className="close-search"
-						onClick={this.props.handleHiddenSearchPage}
-					>
+					<Link to="/" className="close-search">
 						Close
-					</a>
+					</Link>
 					<div className="search-books-input-wrapper">
 						{/*
 							NOTES: The search from BooksAPI is limited to a particular set of search terms.

@@ -1,13 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import * as BooksAPI from '@Api/BooksAPI';
 import BookList from '@Components/book-list/index';
 
 class List extends React.Component {
-	static propTypes = {
-		handleShowSearchPage: PropTypes.func.isRequired
-	};
-
 	state = {
 		books: []
 	};
@@ -65,7 +61,7 @@ class List extends React.Component {
 					</div>
 				</div>
 				<div className="open-search">
-					<a onClick={this.props.handleShowSearchPage}>Add a book</a>
+					<Link to="/search">Add a book</Link>
 				</div>
 			</div>
 		);
