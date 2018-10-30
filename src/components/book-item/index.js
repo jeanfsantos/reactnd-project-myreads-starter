@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const options = [
+	{ value: 'move', displayName: 'Move to...' },
+	{ value: 'currentlyReading', displayName: 'Currently Reading' },
+	{ value: 'wantToRead', displayName: 'Want to Read' },
+	{ value: 'read', displayName: 'Read' },
+	{ value: 'none', displayName: 'None' }
+];
+
 class BookItem extends React.Component {
 	static propTypes = {
 		book: PropTypes.object,
@@ -20,7 +28,7 @@ class BookItem extends React.Component {
 	};
 
 	render() {
-		const { title, authors, imageLinks } = this.props.book;
+		const { title, authors, imageLinks, shelf = 'none' } = this.props.book;
 		return (
 			<li>
 				<div className="book">
@@ -36,14 +44,21 @@ class BookItem extends React.Component {
 							}}
 						/>
 						<div className="book-shelf-changer">
-							<select onChange={this.onChangeSelect}>
-								<option value="move">Move to...</option>
-								<option value="currentlyReading">
-									Currently Reading
-								</option>
-								<option value="wantToRead">Want to Read</option>
-								<option value="read">Read</option>
-								<option value="none">None</option>
+							<select
+								onChange={this.onChangeSelect}
+								defaultValue={shelf}
+							>
+								{options.map((opt, index) => (
+									<option
+										key={index}
+										value={opt.value}
+										{...(index === 0
+											? { disabled: true }
+											: {})}
+									>
+										{opt.displayName}
+									</option>
+								))}
 							</select>
 						</div>
 					</div>
