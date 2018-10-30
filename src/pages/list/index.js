@@ -20,8 +20,7 @@ class List extends React.Component {
 		BooksAPI.update(book, shelf).then(() => {
 			const books = this.state.books.map(_book => {
 				if (book.id === _book.id) {
-					_book.shelf = shelf;
-					return _book;
+					return { ..._book, shelf };
 				}
 				return _book;
 			});

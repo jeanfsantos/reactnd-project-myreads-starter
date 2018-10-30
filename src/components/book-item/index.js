@@ -28,7 +28,7 @@ class BookItem extends React.Component {
 	};
 
 	render() {
-		const { title, authors, imageLinks, shelf = 'none' } = this.props.book;
+		const { title, authors, imageLinks = '', shelf = 'none' } = this.props.book;
 		return (
 			<li>
 				<div className="book">
