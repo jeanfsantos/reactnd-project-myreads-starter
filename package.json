@@ -25,6 +25,8 @@
 		"css-loader": "0.28.7",
 		"dotenv": "4.0.0",
 		"dotenv-expand": "4.2.0",
+		"enzyme": "^3.7.0",
+		"enzyme-adapter-react-16": "^1.6.0",
 		"eslint": "^5.7.0",
 		"eslint-config-react-app": "^2.1.0",
 		"eslint-loader": "1.9.0",
@@ -59,10 +61,25 @@
 	},
 	"jest": {
 		"collectCoverageFrom": [
-			"src/**/*.{js,jsx,mjs}"
+			"src/**/*.{js,jsx,mjs}",
+			"!src/actions/**",
+			"!src/reducers/**",
+			"!src/api/**",
+			"!src/containers/**",
+			"!src/index.js"
 		],
+		"collectCoverage": true,
+		"coverageThreshold": {
+			"global": {
+				"branches": 80,
+				"functions": 80,
+				"lines": 80,
+				"statements": 80
+			}
+		},
 		"setupFiles": [
-			"<rootDir>/config/polyfills.js"
+			"<rootDir>/config/polyfills.js",
+			"<rootDir>/config/enzyme.setup.js"
 		],
 		"testMatch": [
 			"<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",

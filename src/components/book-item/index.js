@@ -28,7 +28,12 @@ class BookItem extends React.Component {
 	};
 
 	render() {
-		const { title, authors, imageLinks = '', shelf = 'none' } = this.props.book;
+		const {
+			title,
+			authors,
+			imageLinks = { thumbnail: '' },
+			shelf = 'none'
+		} = this.props.book;
 		return (
 			<li>
 				<div className="book">
@@ -38,9 +43,9 @@ class BookItem extends React.Component {
 							style={{
 								width: 128,
 								height: 193,
-								backgroundImage: `url("${
-									imageLinks.thumbnail
-								}")`
+								backgroundImage: imageLinks.thumbnail
+									? `url("${imageLinks.thumbnail}")`
+									: ''
 							}}
 						/>
 						<div className="book-shelf-changer">
