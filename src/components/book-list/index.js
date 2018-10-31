@@ -6,7 +6,8 @@ class BookList extends React.Component {
 	static propTypes = {
 		title: PropTypes.string.isRequired,
 		books: PropTypes.array.isRequired,
-		onChangeShelf: PropTypes.func.isRequired
+		onChangeShelf: PropTypes.func.isRequired,
+		onCheckedItem: PropTypes.func.isRequired,
 	};
 
 	render() {
@@ -21,6 +22,7 @@ class BookList extends React.Component {
 								book={book}
 								key={book.id}
 								onChangeShelf={this.props.onChangeShelf}
+								onCheckedItem={this.props.onCheckedItem}
 							/>
 						))}
 					</ol>

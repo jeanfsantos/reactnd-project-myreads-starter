@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import BookList from '../../components/book-list/index';
-import { fetchBooks, updateBooks } from '../../actions/books';
+import { fetchBooks, updateBooks, toggleBook } from '../../actions/books';
 
 class List extends React.Component {
 	static propTypes = {
@@ -20,6 +20,10 @@ class List extends React.Component {
 		this.props.dispatch(updateBooks(book, shelf));
 	};
 
+	handleCheckedItem = book => {
+		this.props.dispatch(toggleBook(this.props.books, book));
+	}
+
 	render() {
 		return (
 			<div className="list-books">
@@ -34,6 +38,7 @@ class List extends React.Component {
 								book => book.shelf === 'currentlyReading'
 							)}
 							onChangeShelf={this.handleShelf}
+							onCheckedItem={this.handleCheckedItem}
 						/>
 						<BookList
 							title="Want to Read"
@@ -41,6 +46,7 @@ class List extends React.Component {
 								book => book.shelf === 'wantToRead'
 							)}
 							onChangeShelf={this.handleShelf}
+							onCheckedItem={this.handleCheckedItem}
 						/>
 						<BookList
 							title="Read"
@@ -48,6 +54,7 @@ class List extends React.Component {
 								book => book.shelf === 'read'
 							)}
 							onChangeShelf={this.handleShelf}
+							onCheckedItem={this.handleCheckedItem}
 						/>
 					</div>
 				</div>

@@ -43,3 +43,13 @@ export const updateSearchBook = (book, shelf) => (dispatch, getState) => {
 export const cleanSearchBooks = () => ({
 	type: CLEAN_SEARCH_BOOKS
 });
+
+export const toggleBook = (books, bookChecked) => {
+	const newBooks = books.map(book => {
+		if (book.id === bookChecked.id) {
+			return { ...book, checked: !bookChecked.checked };
+		}
+		return book;
+	});
+	return { type: SET_BOOKS, payload: newBooks };
+};

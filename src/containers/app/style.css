@@ -175,3 +175,19 @@ body,
 	text-align: center;
 	font-size: 0.8em;
 }
+
+/* book select */
+.book-checked {
+	position: absolute;
+	right: 0;
+	top: -10px;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background: #e9e;
+	background-image: url('../../assets/icons/checked.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
