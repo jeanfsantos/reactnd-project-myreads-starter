@@ -9,7 +9,7 @@ describe('BookItem', () => {
 		imageLinks: { thumbnail: 'teste' },
 		shelf: 'read'
 	};
-	let mockFn = jest.fn();
+	const mockFn = jest.fn();
 
 	beforeEach(() => {
 		mockFn.mockClear();
