@@ -4,14 +4,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import BookItem from '@Components/book-item/index';
-import { fetchSearchBooks, updateSearchBook, cleanSearchBooks } from '@Actions/books';
+import {
+	fetchSearchBooks,
+	updateSearchBook,
+	cleanSearchBooks
+} from '@Actions/books';
 
 class Search extends React.Component {
 	static propTypes = {
 		dispatch: PropTypes.func,
 		books: PropTypes.array,
+		searchBooks: PropTypes.array,
 		history: PropTypes.object
-	}
+	};
 
 	handleInputSearch = e => {
 		this.props.dispatch(fetchSearchBooks(e.target.value));
@@ -24,13 +29,15 @@ class Search extends React.Component {
 	handleClick = () => {
 		this.props.dispatch(cleanSearchBooks());
 		this.props.history.push('/');
-	}
+	};
 
 	render() {
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">
-					<a className="close-search" onClick={this.handleClick}>Close</a>
+					<a className="close-search" onClick={this.handleClick}>
+						Close
+					</a>
 					<div className="search-books-input-wrapper">
 						{/*
 							NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -50,13 +57,19 @@ class Search extends React.Component {
 				</div>
 				<div className="search-books-results">
 					<ol className="books-grid">
-						{this.props.books.map(book => (
-							<BookItem
-								book={book}
-								key={book.id}
-								onChangeShelf={this.handleShelf}
-							/>
-						))}
+						{this.props.searchBooks.map(searchBook => {
+							const book =
+								this.props.books.find(
+									book => book.id === searchBook.id
+								) || searchBook;
+							return (
+								<BookItem
+									book={book}
+									key={book.id}
+									onChangeShelf={this.handleShelf}
+								/>
+							);
+						})}
 					</ol>
 				</div>
 			</div>
@@ -64,8 +77,9 @@ class Search extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
-	books: state.books.searchBooks
+const mapStateToProps = state => ({
+	books: state.books.books,
+	searchBooks: state.books.searchBooks
 });
 
 export default connect(mapStateToProps)(Search);
