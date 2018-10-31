@@ -57,6 +57,11 @@ class Search extends React.Component {
 				</div>
 				<div className="search-books-results">
 					<ol className="books-grid">
+						{/*
+							Antes de renderizar o BookItem, verifica se o livro esta na
+							lista de livros da estante, caso encontre sera passado para
+							o BookItem o livro da estante senão o livro da busca
+						*/}
 						{this.props.searchBooks.map(searchBook => {
 							const book =
 								this.props.books.find(
