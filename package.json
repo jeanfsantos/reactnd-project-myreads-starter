@@ -39,6 +39,7 @@
 		"file-loader": "1.1.5",
 		"fs-extra": "3.0.1",
 		"html-webpack-plugin": "2.29.0",
+		"husky": "^1.1.2",
 		"jest": "20.0.4",
 		"postcss-flexbugs-fixes": "3.2.0",
 		"postcss-loader": "2.0.8",
@@ -58,6 +59,12 @@
 		"start": "node scripts/start.js",
 		"build": "node scripts/build.js",
 		"test": "node scripts/test.js --env=jsdom"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm test -- --coverage",
+			"pre-push": "npm test -- --coverage"
+		}
 	},
 	"jest": {
 		"collectCoverageFrom": [
