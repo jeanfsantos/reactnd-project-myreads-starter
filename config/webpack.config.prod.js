@@ -93,10 +93,11 @@ module.exports = {
 			'react-native': 'react-native-web',
 
 			'@Components': path.resolve(paths.appSrc, 'components'),
-			'@Pages': path.resolve(paths.appSrc, 'pages'),
 			'@Assets': path.resolve(paths.appSrc, 'assets'),
 			'@Containers': path.resolve(paths.appSrc, 'containers'),
-			'@Api': path.resolve(paths.appSrc, 'api')
+			'@Api': path.resolve(paths.appSrc, 'api'),
+			'@Reducers': path.resolve(paths.appSrc, 'reducers'),
+			'@Actions': path.resolve(paths.appSrc, 'actions')
 		},
 		plugins: [
 			// Prevents users from importing files from outside of src/ (or node_modules/).

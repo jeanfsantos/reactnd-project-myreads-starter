@@ -1,31 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as BooksAPI from '@Api/BooksAPI';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import BookList from '@Components/book-list/index';
+import { fetchBooks, updateBooks } from '@Actions/books';
 
 class List extends React.Component {
-	state = {
-		books: []
-	};
+	static propTypes = {
+		dispatch: PropTypes.func,
+		books: PropTypes.array
+	}
 
 	componentDidMount() {
-		BooksAPI.getAll().then(data => {
-			this.setState({
-				books: data
-			});
-		});
+		this.props.dispatch(fetchBooks());
 	}
 
 	handleShelf = (book, shelf) => {
-		BooksAPI.update(book, shelf).then(() => {
-			const books = this.state.books.map(_book => {
-				if (book.id === _book.id) {
-					return { ..._book, shelf };
-				}
-				return _book;
-			});
-			this.setState({ books });
-		});
+		this.props.dispatch(updateBooks(book, shelf));
 	};
 
 	render() {
@@ -38,21 +30,21 @@ class List extends React.Component {
 					<div>
 						<BookList
 							title="Currently Reading"
-							books={this.state.books.filter(
+							books={this.props.books.filter(
 								book => book.shelf === 'currentlyReading'
 							)}
 							onChangeShelf={this.handleShelf}
 						/>
 						<BookList
 							title="Want to Read"
-							books={this.state.books.filter(
+							books={this.props.books.filter(
 								book => book.shelf === 'wantToRead'
 							)}
 							onChangeShelf={this.handleShelf}
 						/>
 						<BookList
 							title="Read"
-							books={this.state.books.filter(
+							books={this.props.books.filter(
 								book => book.shelf === 'read'
 							)}
 							onChangeShelf={this.handleShelf}
@@ -67,4 +59,8 @@ class List extends React.Component {
 	}
 }
 
-export default List;
+const mapStateToProps = (state) => ({
+	books: state.books.books
+});
+
+export default connect(mapStateToProps)(List);

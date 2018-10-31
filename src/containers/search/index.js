@@ -1,39 +1,36 @@
 import React from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import { Link } from 'react-router-dom';
-import * as BooksAPI from '@Api/BooksAPI';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import BookItem from '@Components/book-item/index';
+import { fetchSearchBooks, updateSearchBook, cleanSearchBooks } from '@Actions/books';
 
 class Search extends React.Component {
-	state = {
-		books: []
-	};
+	static propTypes = {
+		dispatch: PropTypes.func,
+		books: PropTypes.array,
+		history: PropTypes.object
+	}
 
 	handleInputSearch = e => {
-		BooksAPI.search(e.target.value).then((data = []) => {
-			if (data.error) {
-				return;
-			}
-			this.setState({ books: data });
-		});
+		this.props.dispatch(fetchSearchBooks(e.target.value));
 	};
 
 	handleShelf = (book, shelf) => {
-		BooksAPI.update(book, shelf).then(() => {
-			const books = this.state.books.filter(
-				_book => book.id !== _book.id
-			);
-			this.setState({ books });
-		});
+		this.props.dispatch(updateSearchBook(book, shelf));
 	};
+
+	handleClick = () => {
+		this.props.dispatch(cleanSearchBooks());
+		this.props.history.push('/');
+	}
 
 	render() {
 		return (
 			<div className="search-books">
 				<div className="search-books-bar">
-					<Link to="/" className="close-search">
-						Close
-					</Link>
+					<a className="close-search" onClick={this.handleClick}>Close</a>
 					<div className="search-books-input-wrapper">
 						{/*
 							NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -53,7 +50,7 @@ class Search extends React.Component {
 				</div>
 				<div className="search-books-results">
 					<ol className="books-grid">
-						{this.state.books.map(book => (
+						{this.props.books.map(book => (
 							<BookItem
 								book={book}
 								key={book.id}
@@ -67,4 +64,8 @@ class Search extends React.Component {
 	}
 }
 
-export default Search;
+const mapStateToProps = (state) => ({
+	books: state.books.searchBooks
+});
+
+export default connect(mapStateToProps)(Search);
