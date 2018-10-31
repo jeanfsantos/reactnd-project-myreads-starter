@@ -12,12 +12,11 @@ describe('BookItem', () => {
 			shelf: 'read'
 		}
 	];
-	const mockFn = jest.fn();
 	const title = 'Currently Reading';
 
 	it('deve renderizar titulo `teste`', () => {
 		const wrapper = shallow(
-			<BookList title={title} books={books} onChangeShelf={mockFn} />
+			<BookList title={title} books={books} onChangeShelf={() => { }} onCheckedItem={() => { }} />
 		);
 		expect(wrapper.find('.bookshelf-title').text()).toEqual(title);
 	});
