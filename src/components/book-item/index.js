@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
-const options = [
+export const options = [
 	{ value: 'move', displayName: 'Move to...' },
 	{ value: 'currentlyReading', displayName: 'Currently Reading' },
 	{ value: 'wantToRead', displayName: 'Want to Read' },
@@ -26,12 +26,13 @@ class BookItem extends React.Component {
 		if (value === 'move') {
 			return;
 		}
-		this.props.onChangeShelf && this.props.onChangeShelf(this.props.book, value);
+		this.props.onChangeShelf &&
+			this.props.onChangeShelf(this.props.book, value);
 	};
 
 	onChecked = () => {
 		this.props.onCheckedItem && this.props.onCheckedItem(this.props.book);
-	}
+	};
 
 	render() {
 		const {
@@ -54,7 +55,11 @@ class BookItem extends React.Component {
 									: ''
 							}}
 						/>
-						<div className={cx({ 'book-checked': this.props.book.checked })}></div>
+						<div
+							className={cx({
+								'book-checked': this.props.book.checked
+							})}
+						/>
 						<div className="book-shelf-changer">
 							<select
 								onChange={this.onChangeSelect}

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import BookList from '../../components/book-list/index';
 import { fetchBooks, updateBooks, toggleBook } from '../../actions/books';
+import { options } from '../../components/book-item/index';
 
 class List extends React.Component {
 	static propTypes = {
@@ -22,7 +23,17 @@ class List extends React.Component {
 
 	handleCheckedItem = book => {
 		this.props.dispatch(toggleBook(this.props.books, book));
-	}
+	};
+
+	handleBooksCheckedShelf = e => {
+		const value = e.target.value;
+		if (value === 'move') {
+			return;
+		}
+		this.props.books.filter(book => book.checked).forEach(book => {
+			this.handleShelf(book, value);
+		});
+	};
 
 	render() {
 		return (
@@ -58,6 +69,19 @@ class List extends React.Component {
 						/>
 					</div>
 				</div>
+				{this.props.books.some(book => book.checked) && (
+					<div className="open-action">
+						<div>
+							<select onChange={this.handleBooksCheckedShelf}>
+								{options.map((option, index) => (
+									<option key={index} value={option.value}>
+										{option.displayName}
+									</option>
+								))}
+							</select>
+						</div>
+					</div>
+				)}
 				<div className="open-search">
 					<Link to="/search">Add a book</Link>
 				</div>

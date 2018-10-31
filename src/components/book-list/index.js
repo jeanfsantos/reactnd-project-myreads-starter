@@ -7,7 +7,7 @@ class BookList extends React.Component {
 		title: PropTypes.string.isRequired,
 		books: PropTypes.array.isRequired,
 		onChangeShelf: PropTypes.func.isRequired,
-		onCheckedItem: PropTypes.func.isRequired,
+		onCheckedItem: PropTypes.func.isRequired
 	};
 
 	render() {
