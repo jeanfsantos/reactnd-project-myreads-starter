@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BookItem from '@Components/book-item/index';
+import BookItem from '../book-item/index';
 
 class BookList extends React.Component {
 	static propTypes = {

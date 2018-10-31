@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Search from '@Containers/search/index';
-import List from '@Containers/list/index';
+import Search from '../search/index';
+import List from '../list/index';
 import './style.css';
 
 const BooksApp = () => (

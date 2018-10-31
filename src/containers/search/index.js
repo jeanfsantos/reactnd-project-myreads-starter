@@ -3,12 +3,12 @@ import { DebounceInput } from 'react-debounce-input';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import BookItem from '@Components/book-item/index';
+import BookItem from '../../components/book-item/index';
 import {
 	fetchSearchBooks,
 	updateSearchBook,
 	cleanSearchBooks
-} from '@Actions/books';
+} from '../../actions/books';
 
 class Search extends React.Component {
 	static propTypes = {

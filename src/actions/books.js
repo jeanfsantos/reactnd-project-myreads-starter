@@ -1,4 +1,4 @@
-import * as BooksAPI from '@Api/BooksAPI';
+import * as BooksAPI from '../api/BooksAPI';
 
 export const SET_BOOKS = 'SET_BOOKS';
 export const SET_SEARCH_BOOKS = 'SET_SEARCH_BOOKS';
@@ -6,7 +6,7 @@ export const CLEAN_SEARCH_BOOKS = 'CLEAN_SEARCH_BOOKS';
 
 export const fetchBooks = () => dispatch => {
 	BooksAPI.getAll().then(data => {
-		dispatch({ type: SET_BOOKS, payload: data});
+		dispatch({ type: SET_BOOKS, payload: data });
 	});
 };
 
@@ -22,7 +22,7 @@ export const updateBooks = (book, shelf) => (dispatch, getState) => {
 	});
 };
 
-export const fetchSearchBooks = (value) => dispatch => {
+export const fetchSearchBooks = value => dispatch => {
 	BooksAPI.search(value).then((data = []) => {
 		if (data.error) {
 			return;

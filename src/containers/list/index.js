@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import BookList from '@Components/book-list/index';
-import { fetchBooks, updateBooks } from '@Actions/books';
+import BookList from '../../components/book-list/index';
+import { fetchBooks, updateBooks } from '../../actions/books';
 
 class List extends React.Component {
 	static propTypes = {
 		dispatch: PropTypes.func,
 		books: PropTypes.array
-	}
+	};
 
 	componentDidMount() {
 		this.props.dispatch(fetchBooks());
@@ -59,7 +59,7 @@ class List extends React.Component {
 	}
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
 	books: state.books.books
 });
 
